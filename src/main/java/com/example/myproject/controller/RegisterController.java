@@ -16,22 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Controller
-public class LoginAndRegisterController {
+public class RegisterController {
 
     @Autowired
     private UserRepo userRepo;
-
-    @GetMapping("login")
-    public String login(){
-        return "login";
-    }
-
-    @PostMapping("login")
-    public String login1(@RequestParam String username,
-                         @RequestParam String password){
-        System.out.println(username + " " + password);
-        return "redirect:";
-    }
 
     @GetMapping("registration")
     public String registration( Model model){

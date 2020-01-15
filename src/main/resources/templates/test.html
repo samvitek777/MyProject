@@ -6,5 +6,8 @@
 </head>
 <body>
 <p th:text="'Ошибка!!! Пользователь с никок ' + ${user} + ' существует!'" />
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>
