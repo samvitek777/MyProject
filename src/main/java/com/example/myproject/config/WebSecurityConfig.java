@@ -25,7 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     //antMatchers(“...”).permitAll() данные urls защищать не надо
-                    .antMatchers("/resources/**","/", "/registration").permitAll()  //antMatchers(“...”).permitAll() данные urls защищать не надо
+                    .antMatchers("/resources/**","/", "/registration", "/libs/bootstrap.min.css",
+                            "/css/index.css", "/css/register.css", "/img/baraholka.png").permitAll()  //antMatchers(“...”).permitAll() данные urls защищать не надо
                     .anyRequest().authenticated()
                     .and()
                 //loginPage(“/login”) определяется страница для совершения логина в приложение, которая доступна всем
