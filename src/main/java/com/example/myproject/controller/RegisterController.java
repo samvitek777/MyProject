@@ -3,6 +3,7 @@ package com.example.myproject.controller;
 import com.example.myproject.domain.User;
 import com.example.myproject.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,11 @@ public class RegisterController {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("registration")
     public String registration( Model model){
-        User user = userRepo.findByUsername("admin");
-        model.addAttribute("id", user.getId());
-        System.out.println(user.getId());
         return "registration";
     }
 
@@ -35,6 +36,7 @@ public class RegisterController {
             model.addAttribute("user", user.getUsername());
             return "test";
         } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.save(user);
             return "redirect:";
         }

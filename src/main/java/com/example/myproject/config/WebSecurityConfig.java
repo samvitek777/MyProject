@@ -1,5 +1,6 @@
 package com.example.myproject.config;
 
+import com.example.myproject.security.AuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthProvider authProvider;
 
 
 
@@ -40,14 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     //Осуществлять вход по специально написанному провайдеру аутентификации
-
-
-    //добавление пользователя для авторизации -- нихуя не работает
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin").password("admin").roles("User");
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth)
+    {
+        auth.authenticationProvider(authProvider);
     }
 
     //Шифровальщик паролей
