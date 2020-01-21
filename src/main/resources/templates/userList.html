@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>UserName </th>
+        <th>Password</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${users.empty}">
+        <td colspan="2"> No Users Available </td>
+    </tr>
+    <tr th:each="book : ${users}">
+        <td><span th:text="${book.username}">UserName</span></td>
+        <td><span th:text="${book.password}">Password</span></td>
+        <td><span th:text="${book.email}">Email</span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

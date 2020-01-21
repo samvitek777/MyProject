@@ -1,5 +1,6 @@
 package com.example.myproject.controller;
 
+import com.example.myproject.domain.Role;
 import com.example.myproject.domain.User;
 import com.example.myproject.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collections;
 
 /** Controller for {@link User} login and registration
  *
@@ -37,6 +40,8 @@ public class RegisterController {
             return "test";
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setActive(true);
+            user.setRoles(Collections.singleton(Role.USER));
             userRepo.save(user);
             return "redirect:";
         }

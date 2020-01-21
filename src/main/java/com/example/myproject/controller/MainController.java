@@ -1,6 +1,8 @@
 package com.example.myproject.controller;
 
+import com.example.myproject.domain.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /** Main controller
@@ -13,7 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String Index(){
+    public String Index(User user, Model model){
+        if(user != null){
+            System.out.println(user.toString());
+        } else {
+            System.out.println("User null");
+        }
         return "index";
     }
 }

@@ -28,18 +28,30 @@ public class AuthProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
+        System.out.println(password);
+
         User user = (User) userService.loadUserByUsername(username);
 
         if(user != null && (user.getUsername().equals(username)))
         {
+
+            System.out.println(password + " - пароль +  паротль юзера " + user.getPassword());
+
+            System.out.println("Прошел первый иф");
+
+            System.out.println(passwordEncoder.matches(password, user.getPassword()));
             if(!passwordEncoder.matches(password, user.getPassword()))
             {
+                System.out.println("не прошел вроверку пароля");
                 throw new BadCredentialsException("Wrong password");
             }
+            System.out.println("Вернул токен");
             return new UsernamePasswordAuthenticationToken(user, password);
         }
-        else
+        else {
+            System.out.println("выполнил елсе");
             throw new BadCredentialsException("Username not found");
+        }
     }
 
     @Override

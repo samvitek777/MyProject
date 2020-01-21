@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -16,7 +18,18 @@ public class UserService implements UserDetailsService {
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userFindByUsername = userRepo.findByUsername(username);
+
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User found");
+        }
+        System.out.println(user.toString());
+        return user;
+
+
+
+        //Што то пошло не так
+        /*User userFindByUsername = userRepo.findByUsername(username);
         //Остальные поиски
 
         if(userFindByUsername != null)
@@ -24,6 +37,10 @@ public class UserService implements UserDetailsService {
             return userFindByUsername;
         }
         //Остальные проверки
-        return null;
+        return null;*/
+    }
+
+    public List<User> findAll() {
+        return userRepo.findAll();
     }
 }
