@@ -15,12 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String Index(User user, Model model){
-        if(user != null){
-            System.out.println(user.toString());
-        } else {
-            System.out.println("User null");
-        }
+    public String Index(){
         return "index";
     }
 }
