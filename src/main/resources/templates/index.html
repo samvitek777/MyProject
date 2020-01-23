@@ -38,7 +38,7 @@
                         <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
                             <div class="btnSingIn" th:case="${false}">
                                 <a class="btn btn-outline-primary mx-1" href="/login" role="button">Войти или зарегистрироваться</a>
-                                <a class="btn btn-primary " href="/login" role="button">Подать обьявление</a>
+                                <a class="btn btn-primary " href="/add" role="button">Подать обьявление</a>
                             </div>
                             <div th:case="${true}" class="btnSingOut">
                                 <a class="btn btn-primary " href="/add" role="button">Подать обьявление</a>
@@ -53,5 +53,23 @@
                 </nav>
 
     </div>
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-md-6">
+            <div class="col mb-4" th:each="product : ${products}">
+                <div class="card mt-4"  style="width: 15rem;">
+                    <img src="https://c.dns-shop.ru/thumb/st4/fit/800/650/cb181e6db823e2683b91169bb803d9b9/b469cfa44e5dd875e8fa01baba7c9e284ca21c23a9cfa802df5106a447505dcc.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.title}"></h5>
+                        <p class="card-text" th:text="${product.description}"></p>
+                        <p style="color: crimson">Цена: <span th:text="${product.price}"></span></p>
+                        <a href="#" class="btn btn-primary">Купить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
 </html>

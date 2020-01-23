@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AminController {
+public class AdminController {
 
     @Autowired
     private UserService userSevice;
