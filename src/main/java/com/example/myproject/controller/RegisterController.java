@@ -43,7 +43,7 @@ public class RegisterController {
             user.setActive(true);
             user.setRoles(Collections.singleton(Role.USER));
             userRepo.save(user);
-            return "redirect:";
+            return "redirect:/login";
         }
     }
 }

@@ -37,11 +37,11 @@
                         </form>
                         <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
                             <div class="btnSingIn" th:case="${false}">
-                                <a class="btn btn-outline-primary mx-1" href="login" role="button">Войти или зарегистрироваться</a>
-                                <a class="btn btn-primary " href="login" role="button">Подать обьявление</a>
+                                <a class="btn btn-outline-primary mx-1" href="/login" role="button">Войти или зарегистрироваться</a>
+                                <a class="btn btn-primary " href="/login" role="button">Подать обьявление</a>
                             </div>
                             <div th:case="${true}" class="btnSingOut">
-                                <a class="btn btn-primary " href="login" role="button">Подать обьявление</a>
+                                <a class="btn btn-primary " href="/add" role="button">Подать обьявление</a>
                                <!-- <div th:inline="text" class="user mx-2">Hello [[${#httpServletRequest.remoteUser}]]!</div>-->
                                 <a href="/profile" class="mx-2 user">Hello [[${#httpServletRequest.remoteUser}]]!</a>
                                 <form th:action="@{/logout}" method="post">

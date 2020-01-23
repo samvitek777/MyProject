@@ -14,6 +14,21 @@ create table usr (
                      primary key (id)
 );
 
+create table products (
+                          id int8 not null,
+                          title varchar(255) not null,
+                          description varchar(255) not null,
+                          text varchar(2048) not null,
+                          tags varchar(255),
+                          price int8 not null,
+                          user_id int8,
+                          primary key (id)
+);
+
+alter table if exists products
+    add constraint products_user_fk
+        foreign key (user_id) references usr;
+
 alter table if exists user_role
     add constraint user_role_user_fk
         foreign key (user_id) references usr;
