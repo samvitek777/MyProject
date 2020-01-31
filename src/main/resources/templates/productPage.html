@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Барахолка</title>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="libs/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">
+        <img src="img/baraholka.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Барахолка
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+            <button class="btn btn-outline-success mr-sm-2" type="submit">Найти</button>
+        </form>
+        <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+            <div class="btnSingIn" th:case="${false}">
+                <a class="btn btn-outline-primary mx-1" href="/login" role="button">Войти или зарегистрироваться</a>
+                <a class="btn btn-primary " href="/login" role="button">Подать обьявление</a>
+            </div>
+            <div th:case="${true}" class="btnSingOut">
+                <!-- <div th:inline="text" class="user mx-2">Hello [[${#httpServletRequest.remoteUser}]]!</div>-->
+                <a href="/profile" class="mx-2 user">Hello [[${#httpServletRequest.remoteUser}]]!</a>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-danger" type="submit" value="Выход"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-5">
+                <img class="img-fluid rounded mb-3 mb-md-0" src="https://c.dns-shop.ru/thumb/st4/fit/800/650/cb181e6db823e2683b91169bb803d9b9/b469cfa44e5dd875e8fa01baba7c9e284ca21c23a9cfa802df5106a447505dcc.jpg" alt="">
+            </div>
+            <div class="col-md-7">
+                <h3 th:text="${product.title}"></h3>
+                <p th:text="${product.description}"></p>
+                <p th:text="${product.text}"></p>
+                <p th:text="${product.price}"></p>
+                <a class="btn btn-primary" href="#">В корзину</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
